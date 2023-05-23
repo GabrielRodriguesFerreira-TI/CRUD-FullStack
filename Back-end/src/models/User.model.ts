@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 import { iCreateUserModel } from "../interfaces/users/users.types";
 import { iCustomModel } from "../interfaces/global/paginate.types";
@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema<iCreateUserModel>(
       required: true,
       maxlength: 50,
       minlength: 4,
-      unique: false,
     },
     password: {
       type: String,
@@ -34,6 +33,13 @@ const userSchema = new mongoose.Schema<iCreateUserModel>(
           required: true,
           unique: true,
         },
+      },
+    ],
+    contacts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Contacts",
+        required: false,
       },
     ],
   },
