@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { createUserSchema } from "../../schemas/users/users.schemas";
 
 export interface iCreateUserModel extends Document {
@@ -7,6 +7,7 @@ export interface iCreateUserModel extends Document {
   password: string;
   emails: object[];
   telephones: object[];
+  contacts: [mongoose.Schema.Types.ObjectId];
   UserWithoutPassword: () => Omit<this, "password">;
 }
 
