@@ -1,3 +1,4 @@
+import "express-async-errors";
 import express, { Application, json } from "express";
 import { customerRoutes } from "./routes/customer.routes";
 import { handleErros } from "./errors/errors";
