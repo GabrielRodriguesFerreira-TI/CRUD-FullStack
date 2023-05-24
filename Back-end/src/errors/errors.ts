@@ -36,7 +36,7 @@ const handleErros = (
     return res.status(400).json({ message: error.flatten().fieldErrors });
   }
 
-  return res.status(500).json({ message: error.name });
+  return res.status(500).json({ message: error.message });
 };
 
 export { AppError, handleErros };

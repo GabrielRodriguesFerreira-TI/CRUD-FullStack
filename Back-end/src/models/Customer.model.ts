@@ -25,12 +25,10 @@ const customerSchema = new mongoose.Schema<iCreateCustomerModel>(
     emails: {
       type: [String],
       required: true,
-      unique: true,
     },
     telephones: {
       type: [String],
       required: true,
-      unique: true,
     },
     contacts: [
       {
@@ -100,7 +98,6 @@ customerSchema.statics.createAndFillEmailsAndTelephones = async function (
 
 customerSchema.methods.CustomerWithoutPassword = function () {
   const user = this.toObject();
-  delete user.contacts;
   delete user.__v;
   delete user.password;
   return user;

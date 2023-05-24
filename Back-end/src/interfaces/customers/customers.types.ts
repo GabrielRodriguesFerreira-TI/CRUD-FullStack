@@ -1,9 +1,10 @@
 import { z } from "zod";
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, Types } from "mongoose";
 import {
   createCustomerSchema,
   returnCreatedCustomerSchema,
 } from "../../schemas/customers/customers.schemas";
+import { ParamType } from "./customersLogin.types";
 
 export type iCreateCustomer = z.infer<typeof createCustomerSchema>;
 
@@ -31,3 +32,32 @@ export type iCreateFillEmailsAndTelephones = mongoose.Document<
     },
     never
   >;
+
+export interface iQueryValues {
+  page: ParamType;
+  limit: ParamType;
+}
+
+export interface iRetrieveCustomerPagination {
+  customers: iCreateCustomerModel[];
+  total: number;
+  limit: number;
+  page?: number;
+  totalPages?: number;
+  nextPage?: number | null;
+  prevPage?: number | null;
+  pagingCounter?: number;
+  hasPrevPage?: boolean;
+  hasNextPage?: boolean;
+  meta?: any;
+}
+
+export interface iRetrieveOneCustomer {
+  _id: Types.ObjectId;
+  fullName: string;
+  emails: string[];
+  telephones: string[];
+  contacts: [mongoose.Schema.Types.ObjectId];
+  createdAt?: string;
+  updatedAt?: string;
+}
