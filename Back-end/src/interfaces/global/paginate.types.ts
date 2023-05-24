@@ -6,6 +6,7 @@ interface IPaginateOptions {
 }
 
 export interface iCustomModel<T extends Document> extends Model<T> {
+  createAndFillEmailsAndTelephones(payload: { fullName: string; password: string; email: string; telephone: string; }): unknown;
   paginate(
     query?: any,
     options?: IPaginateOptions
