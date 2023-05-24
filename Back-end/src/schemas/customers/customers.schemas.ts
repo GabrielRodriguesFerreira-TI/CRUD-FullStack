@@ -13,6 +13,7 @@ export const returnCreatedCustomerSchema = z.object({
   fullName: z.string(),
   emails: z.array(z.string()),
   telephones: z.array(z.string()),
+  contacts: z.array(z.string()),
   createdAt: z.string(),
   updatedAt: z.string(),
 });

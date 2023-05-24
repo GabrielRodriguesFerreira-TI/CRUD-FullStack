@@ -1,4 +1,8 @@
-import { createCustomerController } from "./customers.controllers";
+import {
+  createCustomerController,
+  retrieveCustomersController,
+  retrieveOneCustomerController,
+} from "./customers.controllers";
 import {
   customerLoginController,
   customerRefreshTokenController,
@@ -10,4 +14,6 @@ export {
   customerLoginController,
   customerRefreshTokenController,
   customerLogoutController,
+  retrieveCustomersController,
+  retrieveOneCustomerController,
 };
