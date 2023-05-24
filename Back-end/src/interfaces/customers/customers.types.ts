@@ -3,6 +3,8 @@ import mongoose, { Document, Types } from "mongoose";
 import {
   createCustomerSchema,
   returnCreatedCustomerSchema,
+  returnUpdateCustomerSchema,
+  updateCustomerSchema,
 } from "../../schemas/customers/customers.schemas";
 import { ParamType } from "./customersLogin.types";
 
@@ -11,6 +13,10 @@ export type iCreateCustomer = z.infer<typeof createCustomerSchema>;
 export type iReturnCreatedCustomer = z.infer<
   typeof returnCreatedCustomerSchema
 >;
+
+export type iUpdateCustomer = z.infer<typeof updateCustomerSchema>;
+
+export type iReturnUpdateCustomer = z.infer<typeof returnUpdateCustomerSchema>;
 
 export interface iCreateCustomerModel extends Document {
   fullName: string;

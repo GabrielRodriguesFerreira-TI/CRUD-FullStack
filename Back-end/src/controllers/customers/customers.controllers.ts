@@ -3,7 +3,10 @@ import {
   iCreateCustomer,
   iQueryValues,
   iRetrieveCustomerPagination,
+  iRetrieveOneCustomer,
   iReturnCreatedCustomer,
+  iReturnUpdateCustomer,
+  iUpdateCustomer,
 } from "../../interfaces/customers/customers.types";
 import * as Customers from "../../services/customers/index";
 
@@ -38,7 +41,20 @@ export const retrieveOneCustomerController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const customer = await Customers.retrieveOneCustomerService(req);
+  const customer: iRetrieveOneCustomer =
+    await Customers.retrieveOneCustomerService(req);
 
   return res.status(200).json(customer);
+};
+
+export const updateCustomersController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const customerInfo: iUpdateCustomer = req.body;
+
+  const updatedUser: iReturnUpdateCustomer =
+    await Customers.updateCustomersService(customerInfo, req);
+
+  return res.status(200).json(updatedUser);
 };
