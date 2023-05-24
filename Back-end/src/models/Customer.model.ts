@@ -33,7 +33,6 @@ const customerSchema = new mongoose.Schema<iCreateCustomerModel>(
       {
         type: Schema.Types.ObjectId,
         ref: "Contacts",
-        required: false,
       },
     ],
   },

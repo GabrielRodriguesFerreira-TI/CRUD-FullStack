@@ -4,6 +4,7 @@ import { customerRoutes } from "./routes/customer.routes";
 import { handleErros } from "./errors/errors";
 import cookieParser from "cookie-parser";
 import { customersLoginRoutes } from "./routes/customerLogin.routes";
+import { contactsRoutes } from "./routes/contacts.routes";
 
 const app: Application = express();
 
@@ -12,6 +13,7 @@ app.use(cookieParser());
 
 app.use("", customerRoutes);
 app.use("", customersLoginRoutes);
+app.use("", contactsRoutes);
 
 app.use(handleErros);
 
