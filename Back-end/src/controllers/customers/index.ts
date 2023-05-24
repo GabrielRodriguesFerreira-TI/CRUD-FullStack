@@ -2,6 +2,7 @@ import {
   createCustomerController,
   retrieveCustomersController,
   retrieveOneCustomerController,
+  updateCustomersController,
 } from "./customers.controllers";
 import {
   customerLoginController,
@@ -16,4 +17,5 @@ export {
   customerLogoutController,
   retrieveCustomersController,
   retrieveOneCustomerController,
+  updateCustomersController,
 };
