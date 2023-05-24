@@ -1,3 +1,6 @@
-import { createContactsController } from "./contacts.controllers";
+import {
+  createContactsController,
+  updateContactsController,
+} from "./contacts.controllers";
 
-export { createContactsController };
+export { createContactsController, updateContactsController };

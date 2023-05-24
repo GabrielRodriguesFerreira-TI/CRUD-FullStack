@@ -1,3 +1,4 @@
 import { createContactsService } from "./createContacts.service";
+import { updateContactsService } from "./updateContacts.service";
 
-export { createContactsService };
+export { createContactsService, updateContactsService };

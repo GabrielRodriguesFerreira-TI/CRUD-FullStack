@@ -3,6 +3,7 @@ import * as Contacts from "../../services/contacts/index";
 import {
   iCreateContact,
   iReturnCreatedContact,
+  iUpdateContact,
 } from "../../interfaces/contacts/contacts.types";
 
 export const createContactsController = async (
@@ -15,4 +16,15 @@ export const createContactsController = async (
     await Contacts.createContactsService(contactInfo, req);
 
   return res.status(201).json(contactCreated);
+};
+
+export const updateContactsController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const contactInfo: iUpdateContact = req.body;
+
+  const updatedContact = await Contacts.updateContactsService(contactInfo, req);
+
+  return res.status(200).json(updatedContact);
 };
