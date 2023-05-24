@@ -28,3 +28,12 @@ export const updateContactsController = async (
 
   return res.status(200).json(updatedContact);
 };
+
+export const deleteContactsController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  await Contacts.deleteContactsService(req, res);
+
+  return res.status(204).send();
+};
