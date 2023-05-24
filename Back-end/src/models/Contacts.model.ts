@@ -23,7 +23,7 @@ const contactSchema = new mongoose.Schema<iCreateContactModel>(
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: "Users",
+      ref: "Customers",
       required: true,
     },
   },
