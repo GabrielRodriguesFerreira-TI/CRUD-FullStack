@@ -5,6 +5,8 @@ import {
   iCreateCustomerModel,
 } from "../interfaces/customers/customers.types";
 import { iCustomModel } from "../interfaces/global/paginate.types";
+import { addPasswordHashingToSchema } from "../hooks/hashingPassword";
+import { AppError } from "../errors/errors";
 
 const customerSchema = new mongoose.Schema<iCreateCustomerModel>(
   {
@@ -42,6 +44,42 @@ const customerSchema = new mongoose.Schema<iCreateCustomerModel>(
 );
 
 customerSchema.plugin(mongoosePaginate);
+
+addPasswordHashingToSchema(customerSchema);
+
+customerSchema.pre<iCreateCustomerModel>("save", async function (next) {
+  const customer = this;
+
+  const emailDuplicates = await Customer.find({
+    _id: { $ne: customer._id },
+    emails: { $in: customer.emails },
+  });
+
+  if (emailDuplicates.length > 0) {
+    const duplicateEmails = emailDuplicates.map((c) => c.emails).flat();
+    const errorMessage = `The following emails are already in use: ${duplicateEmails.join(
+      ", "
+    )}`;
+    throw new AppError(errorMessage, 409);
+  }
+
+  const telephoneDuplicates = await Customer.find({
+    _id: { $ne: customer._id },
+    telephones: { $in: customer.telephones },
+  });
+
+  if (telephoneDuplicates.length > 0) {
+    const duplicateTelephones = telephoneDuplicates
+      .map((c) => c.telephones)
+      .flat();
+    const errorMessage = `The following phones are already in use: ${duplicateTelephones.join(
+      ", "
+    )}`;
+    throw new AppError(errorMessage, 409);
+  }
+
+  next();
+});
 
 customerSchema.statics.createAndFillEmailsAndTelephones = async function (
   payload: iCreateCustomer
