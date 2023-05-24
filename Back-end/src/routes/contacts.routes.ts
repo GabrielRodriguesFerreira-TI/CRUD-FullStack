@@ -26,3 +26,11 @@ contactsRoutes.patch(
   Middlewares.verifyContactMiddleware,
   Contacts.updateContactsController
 );
+
+contactsRoutes.delete(
+  "/contacts/:customer_id/:contact_id",
+  Middlewares.tokenValidationMiddleware,
+  Middlewares.verifyIdExistsMiddlewares,
+  Middlewares.verifyPermissionMiddlewares,
+  Contacts.deleteContactsController
+);
