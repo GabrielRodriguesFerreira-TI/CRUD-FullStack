@@ -3,6 +3,7 @@ import {
   retrieveCustomersController,
   retrieveOneCustomerController,
   updateCustomersController,
+  deleteCustomersController,
 } from "./customers.controllers";
 import {
   customerLoginController,
@@ -18,4 +19,5 @@ export {
   retrieveCustomersController,
   retrieveOneCustomerController,
   updateCustomersController,
+  deleteCustomersController,
 };

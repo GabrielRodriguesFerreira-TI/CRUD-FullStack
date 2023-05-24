@@ -37,3 +37,11 @@ customerRoutes.patch(
   Middlewares.verifyPermissionMiddlewares,
   Customers.updateCustomersController
 );
+
+customerRoutes.delete(
+  "/customers/:customer_id",
+  Middlewares.tokenValidationMiddleware,
+  Middlewares.verifyIdExistsMiddlewares,
+  Middlewares.verifyPermissionMiddlewares,
+  Customers.deleteCustomersController
+);

@@ -58,3 +58,12 @@ export const updateCustomersController = async (
 
   return res.status(200).json(updatedUser);
 };
+
+export const deleteCustomersController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  await Customers.deleteCustomersService(req, res);
+
+  return res.status(204).send();
+};
