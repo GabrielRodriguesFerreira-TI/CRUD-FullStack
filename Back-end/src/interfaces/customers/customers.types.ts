@@ -7,6 +7,7 @@ import {
   updateCustomerSchema,
 } from "../../schemas/customers/customers.schemas";
 import { ParamType } from "./customersLogin.types";
+import { iCreateContactModel } from "../contacts/contacts.types";
 
 export type iCreateCustomer = z.infer<typeof createCustomerSchema>;
 
@@ -23,7 +24,7 @@ export interface iCreateCustomerModel extends Document {
   password: string;
   emails: string[];
   telephones: string[];
-  contacts: [mongoose.Schema.Types.ObjectId];
+  contacts: iCreateContactModel[];
   CustomerWithoutPassword: () => Omit<this, "password">;
 }
 
@@ -63,7 +64,7 @@ export interface iRetrieveOneCustomer {
   fullName: string;
   emails: string[];
   telephones: string[];
-  contacts: [mongoose.Schema.Types.ObjectId];
+  contacts: iCreateContactModel[];
   createdAt?: string;
   updatedAt?: string;
 }

@@ -32,6 +32,13 @@ const contactSchema = new mongoose.Schema<iCreateContactModel>(
 
 contactSchema.plugin(mongoosePaginate);
 
+contactSchema.methods.ReturnedNewContact = function () {
+  const contact = this.toObject();
+  delete contact.__v;
+  delete contact.updatedAt;
+  return contact;
+};
+
 export const Contact = mongoose.model<
   iCreateContactModel,
   iCustomModel<iCreateContactModel>

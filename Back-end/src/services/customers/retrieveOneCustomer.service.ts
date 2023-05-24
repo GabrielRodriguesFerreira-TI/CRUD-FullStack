@@ -9,7 +9,7 @@ export const retrieveOneCustomerService = async (
 
   const customer = await Customer.findOne({
     _id: customerId,
-  });
+  }).populate("contacts", "_id fullName email telephone createdAt");
 
   const customerReturn = customer!.CustomerWithoutPassword();
 
