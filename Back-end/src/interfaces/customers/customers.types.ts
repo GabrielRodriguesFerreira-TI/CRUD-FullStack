@@ -24,6 +24,7 @@ export interface iCreateCustomerModel extends Document {
   password: string;
   emails: string[];
   telephones: string[];
+  imageProfile?: string;
   contacts: iCreateContactModel[];
   CustomerWithoutPassword: () => Omit<this, "password">;
 }

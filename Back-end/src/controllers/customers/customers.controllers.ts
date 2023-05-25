@@ -67,3 +67,28 @@ export const deleteCustomersController = async (
 
   return res.status(204).send();
 };
+
+export const uploadCustomerProfileImageController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const file = req.file!;
+  const customerId: string = req.params.customer_id;
+
+  const response: { message: string } =
+    await Customers.uploadCustomerProfileImageService(file, customerId);
+
+  return res.status(200).json(response);
+};
+
+export const deleteCustomerProfileImageController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const file: string = req.params.filename;
+  const customerId: string = req.params.customer_id;
+
+  await Customers.deleteCustomersProfileImageService(file, customerId);
+
+  return res.sendStatus(204);
+};

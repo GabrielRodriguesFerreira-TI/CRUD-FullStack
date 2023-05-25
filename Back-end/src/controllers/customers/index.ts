@@ -4,6 +4,7 @@ import {
   retrieveOneCustomerController,
   updateCustomersController,
   deleteCustomersController,
+  uploadCustomerProfileImageController,
 } from "./customers.controllers";
 import {
   customerLoginController,
@@ -20,4 +21,5 @@ export {
   retrieveOneCustomerController,
   updateCustomersController,
   deleteCustomersController,
+  uploadCustomerProfileImageController,
 };

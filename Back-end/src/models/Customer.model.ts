@@ -29,6 +29,7 @@ const customerSchema = new mongoose.Schema<iCreateCustomerModel>(
       type: [String],
       required: true,
     },
+    imageProfile: { type: String, required: false },
     contacts: [
       {
         type: Schema.Types.ObjectId,
