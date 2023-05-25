@@ -7,10 +7,12 @@ export const createCustomerSchema = z.object({
   email: z.string().email(),
   telephone: z
     .string({
-      invalid_type_error:
+      required_error: "Required",
+    })
+    .regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, {
+      message:
         "Invalid phone. Use the format (XX) XXXX-XXXX or (XXX) XXX-XXXX.",
     })
-    .regex(/^\(\d{2}\) \d{4,5}-\d{4}$/)
     .or(z.string().regex(/^\(\d{3}\) \d{3}-\d{4}$/)),
 });
 
