@@ -1,12 +1,13 @@
 import multer from "multer";
 import { Router } from "express";
-import * as Customers from "../controllers/customers/index";
-import * as Middlewares from "../middlewares/index";
 import {
   createCustomerSchema,
   updateCustomerSchema,
 } from "../schemas/customers/customers.schemas";
 import imageProfileMulter from "../config/imageProfile.multer";
+import * as Customers from "../controllers/customers/index";
+import * as Middlewares from "../middlewares/index";
+import { midiaUploadRateLimit } from "../config/midiaRateLimit.config";
 
 export const customerRoutes: Router = Router();
 const upload = multer(imageProfileMulter);
@@ -55,6 +56,7 @@ customerRoutes.patch(
   Middlewares.verifyIdExistsMiddlewares,
   Middlewares.verifyPermissionMiddlewares,
   Middlewares.verifyImageProfileMiddlewares,
+  midiaUploadRateLimit,
   upload.single("image"),
   Customers.uploadCustomerProfileImageController
 );
