@@ -18,8 +18,6 @@ export const deleteContactsService = async (
     contact._id.equals(new mongoose.Types.ObjectId(contact_id))
   );
 
-  console.log(contactIndex);
-
   if (contactIndex === -1) {
     throw new AppError("Contact not found for the customer", 404);
   }
