@@ -1,10 +1,11 @@
 import { Router } from "express";
-import * as Middlewares from "../middlewares/index";
-import * as Contacts from "../controllers/contacts/index";
 import {
   createContactSchema,
   updateContactSchema,
 } from "../schemas/contacts/contacts.schemas";
+import { addContactRateLimit } from "../config/addContactRateLimit.config";
+import * as Middlewares from "../middlewares/index";
+import * as Contacts from "../controllers/contacts/index";
 
 export const contactsRoutes: Router = Router();
 
@@ -14,6 +15,7 @@ contactsRoutes.post(
   Middlewares.verifyIdExistsMiddlewares,
   Middlewares.validateBodyMiddleware(createContactSchema),
   Middlewares.verifyContactMiddleware,
+  addContactRateLimit,
   Contacts.createContactsController
 );
 
