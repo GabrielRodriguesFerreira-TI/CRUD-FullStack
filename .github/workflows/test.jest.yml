@@ -26,5 +26,14 @@ jobs:
       - name: Install dependencies
         run: npm install --production=false
 
+      - name: Set up enviroment variables
+        run: |
+          echo "ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }}" >> $GITHUB_ENV
+          echo "ACCESS_TOKEN_LIFE=${{ secrets.ACCESS_TOKEN_LIFE }}" >> $GITHUB_ENV
+          echo "REFRESH_TOKEN_SECRET=${{ secrets.REFRESH_TOKEN_SECRET }}" >> $GITHUB_ENV
+          echo "REFRESH_TOKEN_LIFE=${{ secrets.REFRESH_TOKEN_LIFE }}" >> $GITHUB_ENV
+          echo "ACCESS_COOKIE_LIFE=${{ secrets.ACCESS_COOKIE_LIFE }}" >> $GITHUB_ENV
+          echo "REFRESH_COOKIE_LIFE=${{ secrets.REFRESH_COOKIE_LIFE }}" >> $GITHUB_ENV
+
       - name: Run Tests
         run: npm run test
