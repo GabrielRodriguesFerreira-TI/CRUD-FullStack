@@ -1,3 +1,4 @@
+import multer from "multer";
 import { Router } from "express";
 import * as Customers from "../controllers/customers/index";
 import * as Middlewares from "../middlewares/index";
@@ -5,8 +6,10 @@ import {
   createCustomerSchema,
   updateCustomerSchema,
 } from "../schemas/customers/customers.schemas";
+import imageProfileMulter from "../config/imageProfile.multer";
 
 export const customerRoutes: Router = Router();
+const upload = multer(imageProfileMulter);
 
 customerRoutes.post(
   "/customers",
@@ -44,4 +47,21 @@ customerRoutes.delete(
   Middlewares.verifyIdExistsMiddlewares,
   Middlewares.verifyPermissionMiddlewares,
   Customers.deleteCustomersController
+);
+
+customerRoutes.patch(
+  "/customers/upload/:customer_id",
+  Middlewares.tokenValidationMiddleware,
+  Middlewares.verifyIdExistsMiddlewares,
+  Middlewares.verifyPermissionMiddlewares,
+  Middlewares.verifyImageProfileMiddlewares,
+  upload.single("image"),
+  Customers.uploadCustomerProfileImageController
+);
+
+customerRoutes.delete(
+  "/customers/upload/:filename/:customer_id",
+  Middlewares.tokenValidationMiddleware,
+  Middlewares.verifyIdExistsMiddlewares,
+  Middlewares.verifyPermissionMiddlewares
 );

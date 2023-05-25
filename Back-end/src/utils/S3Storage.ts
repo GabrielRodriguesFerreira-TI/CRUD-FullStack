@@ -1,4 +1,4 @@
-import { S3 } from "aws-sdk";
+import { S3 } from "@aws-sdk/client-s3";
 import "dotenv/config";
 // Note that the AWS config is not being done directly in the code,
 // this is because the S3 system itself captures the values inside the .env file
@@ -12,11 +12,16 @@ class S3Storage {
     });
   }
 
-  async saveFile(filename: string, buffer: Buffer): Promise<void> {
+  async saveFile(
+    filename: string,
+    buffer: Buffer,
+    mimetype: string
+  ): Promise<void> {
     this.client.putObject({
       Bucket: String(process.env.AWS_BUCKET_NAME),
       Key: filename,
       Body: buffer,
+      ContentType: mimetype,
     });
   }
 
