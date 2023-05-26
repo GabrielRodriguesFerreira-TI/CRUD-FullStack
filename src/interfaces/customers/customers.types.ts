@@ -41,6 +41,14 @@ export type iCreateFillEmailsAndTelephones = mongoose.Document<
     never
   >;
 
+export type iCreateNewCustomer = Document<unknown, {}, iCreateCustomerModel> &
+  Omit<
+    iCreateCustomerModel & {
+      _id: Types.ObjectId;
+    },
+    never
+  >;
+
 export interface iQueryValues {
   page: ParamType;
   limit: ParamType;
