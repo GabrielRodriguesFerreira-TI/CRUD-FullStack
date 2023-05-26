@@ -30,28 +30,22 @@ describe("PATCH /customers", () => {
   beforeEach(async () => {
     await Customer.deleteMany();
 
-    customerComplete = new Customer({
-      ...customerUpdateMock.default.customerUpdateMock.customerComplete,
-      emails:
-        customerUpdateMock.default.customerUpdateMock.customerComplete.email,
+    customerComplete = await Customer.create({
+      ...customerUpdateMock.default.customerDeleteMock.customerOwner,
+      emails: customerUpdateMock.default.customerDeleteMock.customerOwner.email,
       telephones:
-        customerUpdateMock.default.customerUpdateMock.customerComplete
+        customerUpdateMock.default.customerDeleteMock.customerOwner.telephone,
+    });
+
+    customerExtra = await Customer.create({
+      ...customerUpdateMock.default.customerDeleteMock.customerIsNotOwner,
+      emails: customerUpdateMock.default.customerDeleteMock.customerOwner.email,
+      telephones:
+        customerUpdateMock.default.customerDeleteMock.customerIsNotOwner
           .telephone,
     });
-    await customerComplete.save();
 
     updatedCustomerCompleteUrl = baseUrl + `/${customerComplete._id}`;
-
-    customerExtra = new Customer({
-      ...customerUpdateMock.default.customerUpdateMock.customerIsNotOwner,
-      emails:
-        customerUpdateMock.default.customerUpdateMock.customerIsNotOwner.email,
-      telephones:
-        customerUpdateMock.default.customerUpdateMock.customerIsNotOwner
-          .telephone,
-    });
-    await customerExtra.save();
-
     updatedCustomerExtraUrl = baseUrl + `/${customerExtra._id}`;
   });
 
@@ -228,7 +222,7 @@ describe("PATCH /customers", () => {
   });
 
   it("Error: Must not be able to update - Email already exists", async () => {
-    const customer = new Customer({
+    await Customer.create({
       ...customerUpdateMock.default.customerUpdateMock.customerUniqueEmail,
       emails:
         customerUpdateMock.default.customerUpdateMock.customerUniqueEmail.email,
@@ -236,7 +230,6 @@ describe("PATCH /customers", () => {
         customerUpdateMock.default.customerUpdateMock.customerUniqueEmail
           .telephone,
     });
-    await customer.save();
 
     const response = await request
       .patch(updatedCustomerCompleteUrl)

@@ -33,13 +33,14 @@ describe("GET /customers", () => {
     const uri = server.getUri();
     await mongoose.connect(uri, { autoIndex: true });
 
-    await Customer.create([
+    const customersData = [
       { ...customerRetrieveAll.default.customerRetrieveAll.customerRetrieve1 },
       { ...customerRetrieveAll.default.customerRetrieveAll.customerRetrieve2 },
       { ...customerRetrieveAll.default.customerRetrieveAll.customerRetrieve3 },
       { ...customerRetrieveAll.default.customerRetrieveAll.customerRetrieve4 },
       { ...customerRetrieveAll.default.customerRetrieveAll.customerRetrieve5 },
-    ]);
+    ];
+    await Customer.insertMany(customersData);
 
     customerCreate = new Customer({
       ...customerRetrieveAll.default.customerRetrieveAll.customerCreate,
@@ -80,7 +81,9 @@ describe("GET /customers", () => {
       query,
       options
     )) as unknown as iRetrieveCustomerPagination;
-    readOneCustomer = await Customer.findById(customerCreate._id);
+    readOneCustomer = await Customer.findOne({
+      _id: customerCreate._id,
+    }).lean();
 
     request = supertest(app);
   });

@@ -30,14 +30,13 @@ describe("POST /login", () => {
   });
 
   it("Success: Must be able to login", async () => {
-    const customer = new Customer({
+    await Customer.create({
       ...customerCreateMock.default.customerLoginMock.customerActivate,
       emails:
         customerCreateMock.default.customerLoginMock.customerActivate.email,
       telephones:
         customerCreateMock.default.customerLoginMock.customerActivate.telephone,
     });
-    await customer.save();
 
     const response = await request.post(baseUrl).send({
       email:
@@ -59,14 +58,13 @@ describe("POST /login", () => {
   });
 
   it("Success: Must be able to refresh customer token", async () => {
-    const customer = new Customer({
+    await Customer.create({
       ...customerCreateMock.default.customerLoginMock.customerActivate,
       emails:
         customerCreateMock.default.customerLoginMock.customerActivate.email,
       telephones:
         customerCreateMock.default.customerLoginMock.customerActivate.telephone,
     });
-    await customer.save();
 
     const login = await request.post(baseUrl).send({
       email:
@@ -91,14 +89,13 @@ describe("POST /login", () => {
   });
 
   it("Success: Must be able to logout customer", async () => {
-    const customer = new Customer({
+    await Customer.create({
       ...customerCreateMock.default.customerLoginMock.customerActivate,
       emails:
         customerCreateMock.default.customerLoginMock.customerActivate.email,
       telephones:
         customerCreateMock.default.customerLoginMock.customerActivate.telephone,
     });
-    await customer.save();
 
     const login = await request.post(baseUrl).send({
       email:
@@ -123,14 +120,13 @@ describe("POST /login", () => {
   });
 
   it("Error: Must not be able to login - Invalid credential 1 - Wrong password", async () => {
-    const customer = new Customer({
+    await Customer.create({
       ...customerCreateMock.default.customerLoginMock.customerActivate,
       emails:
         customerCreateMock.default.customerLoginMock.customerActivate.email,
       telephones:
         customerCreateMock.default.customerLoginMock.customerActivate.telephone,
     });
-    await customer.save();
 
     const response = await request.post(baseUrl).send({
       email:
@@ -151,14 +147,13 @@ describe("POST /login", () => {
   });
 
   it("Error: Must not be able to login - Invalid credential 2 - Wrong email", async () => {
-    const customer = new Customer({
+    await Customer.create({
       ...customerCreateMock.default.customerLoginMock.customerActivate,
       emails:
         customerCreateMock.default.customerLoginMock.customerActivate.email,
       telephones:
         customerCreateMock.default.customerLoginMock.customerActivate.telephone,
     });
-    await customer.save();
 
     const response = await request.post(baseUrl).send({
       email:
@@ -181,14 +176,13 @@ describe("POST /login", () => {
   });
 
   it("Error: Must not be able to refresh token - Invalid token", async () => {
-    const customer = new Customer({
+    await Customer.create({
       ...customerCreateMock.default.customerLoginMock.customerActivate,
       emails:
         customerCreateMock.default.customerLoginMock.customerActivate.email,
       telephones:
         customerCreateMock.default.customerLoginMock.customerActivate.telephone,
     });
-    await customer.save();
 
     const login = await request.post(baseUrl).send({
       email:
