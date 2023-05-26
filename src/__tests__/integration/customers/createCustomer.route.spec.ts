@@ -56,7 +56,7 @@ describe("POST /customers", () => {
   });
 
   it("Error: Must not be able to create a customer - Email already exists", async () => {
-    const uniqueCustomer = new Customer({
+    await Customer.create({
       ...customerCreateMock.default.customersCreateMock.customerComplete,
       emails:
         customerCreateMock.default.customersCreateMock.customerComplete.email,
@@ -64,7 +64,6 @@ describe("POST /customers", () => {
         customerCreateMock.default.customersCreateMock.customerComplete
           .telephone,
     });
-    await uniqueCustomer.save();
 
     const response = await request
       .post(baseUrl)
@@ -82,7 +81,7 @@ describe("POST /customers", () => {
   });
 
   it("Error: Must not be able to create a customer - Telephone already exists", async () => {
-    const uniqueCustomer = new Customer({
+    await Customer.create({
       ...customerCreateMock.default.customersCreateMock.customerComplete,
       emails:
         customerCreateMock.default.customersCreateMock.customerComplete.email,
@@ -90,7 +89,6 @@ describe("POST /customers", () => {
         customerCreateMock.default.customersCreateMock.customerComplete
           .telephone,
     });
-    await uniqueCustomer.save();
 
     const response = await request
       .post(baseUrl)

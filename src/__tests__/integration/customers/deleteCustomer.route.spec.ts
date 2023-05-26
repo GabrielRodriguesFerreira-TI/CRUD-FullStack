@@ -32,22 +32,20 @@ describe("DELETE /customers", () => {
   beforeEach(async () => {
     await Customer.deleteMany();
 
-    customerComplete = new Customer({
+    customerComplete = await Customer.create({
       ...customerDeleteMock.default.customerDeleteMock.customerOwner,
       emails: customerDeleteMock.default.customerDeleteMock.customerOwner.email,
       telephones:
         customerDeleteMock.default.customerDeleteMock.customerOwner.telephone,
     });
-    await customerComplete.save();
 
-    customerExtra = new Customer({
+    customerExtra = await Customer.create({
       ...customerDeleteMock.default.customerDeleteMock.customerIsNotOwner,
       emails: customerDeleteMock.default.customerDeleteMock.customerOwner.email,
       telephones:
         customerDeleteMock.default.customerDeleteMock.customerIsNotOwner
           .telephone,
     });
-    await customerExtra.save();
 
     destroyCustomerUrl = baseUrl + `/${customerComplete._id}`;
     destroyCustomerExtraUrl = baseUrl + `/${customerExtra._id}`;
