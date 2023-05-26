@@ -1,5 +1,5 @@
 import { z } from "zod";
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, Types } from "mongoose";
 import {
   createContactSchema,
   returnCreatedContactSchema,
@@ -19,3 +19,11 @@ export interface iCreateContactModel extends Document {
   owner: mongoose.Schema.Types.ObjectId;
   ReturnedNewContact: () => Omit<this, "__v" | "updatedAt">;
 }
+
+export type iCreateNewContact = Document<unknown, {}, iCreateContactModel> &
+  Omit<
+    iCreateContactModel & {
+      _id: Types.ObjectId;
+    },
+    never
+  >;

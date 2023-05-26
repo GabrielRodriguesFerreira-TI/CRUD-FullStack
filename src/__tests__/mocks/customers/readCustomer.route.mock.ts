@@ -32,7 +32,7 @@ export const customerRetrieveAll = {
   customerCreate: {
     fullName: "Maltohumor",
     password: "123456",
-    emails: "antonio@gmail.com",
+    email: "antonio@gmail.com",
     telephone: "(28) 99964-9811",
   },
 };
