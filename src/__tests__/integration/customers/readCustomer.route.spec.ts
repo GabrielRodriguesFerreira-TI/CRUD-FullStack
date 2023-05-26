@@ -8,13 +8,10 @@ import {
   iRetrieveCustomerPagination,
   iReturnCreatedCustomer,
 } from "../../../interfaces/customers/customers.types";
-import * as customerRetrieveAll from "../../mocks/index";
 import { Contact } from "../../../models/Contacts.model";
-import {
-  iCreateNewContact,
-  iReturnCreatedContact,
-} from "../../../interfaces/contacts/contacts.types";
+import { iCreateNewContact } from "../../../interfaces/contacts/contacts.types";
 import { generateToken } from "../../mocks/token/token.mock";
+import * as customerRetrieveAll from "../../mocks/index";
 
 describe("GET /customers", () => {
   const baseUrl: string = "/customers";
