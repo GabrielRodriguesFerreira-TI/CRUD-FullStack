@@ -2,6 +2,7 @@ import "express-async-errors";
 import cookieParser from "cookie-parser";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "./docs/swagger.json";
+import cors from "cors";
 import { handleErros } from "./errors/errors";
 import { contactsRoutes } from "./routes/contacts.routes";
 import { customerRoutes } from "./routes/customer.routes";
@@ -11,6 +12,7 @@ import express, { Application, json } from "express";
 const app: Application = express();
 
 app.use(json());
+app.use(cors());
 app.use(cookieParser());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
